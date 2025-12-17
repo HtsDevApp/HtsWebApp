@@ -1,0 +1,388 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
+export default function CongeladosDashboard() {
+  const { logout } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Helper to toggle menu
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
+  return (
+    <div className="bg-gray-50 font-sans scroll-smooth">
+      {/* --- NAVBAR --- */}
+      <nav className="bg-white shadow-md border-gray-200 fixed w-full top-0 left-0 z-50">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="/HTS-10.png" className="h-8" alt="HTS Logo" />
+          </Link>
+
+          <button
+            onClick={toggleMenu}
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-colors duration-200"
+            aria-controls="navbar-default"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+
+          <div
+            className={`${
+              isMobileMenuOpen ? "block" : "hidden"
+            } w-full md:block md:w-auto`}
+            id="navbar-default"
+          >
+            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+              {/* Internal Routes (Shared Pages) */}
+              <li>
+                <Link
+                  to="/formulario-caso"
+                  className="block py-2 px-3 text-[#c1272d] md:p-0 hover:text-red-600 transition-colors duration-300"
+                >
+                  Crea tu Caso
+                </Link>
+              </li>
+
+              {/* Colocalr el Link de PowerApps en el href*/}
+              <li>
+                <a
+                  href=""
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block py-2 px-3 text-[#c1272d] md:p-0 hover:text-red-600 transition-colors duration-300"
+                >
+                  Consulta de Casos
+                </a>
+              </li>
+
+              <li>
+                <Link
+                  to="/contents"
+                  className="block py-2 px-3 text-[#c1272d] md:p-0 hover:text-red-600 transition-colors duration-300"
+                >
+                  Artículos de Conocimiento
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/encuesta"
+                  className="block py-2 px-3 text-[#c1272d] md:p-0 hover:text-red-600 transition-colors duration-300"
+                >
+                  Encuesta
+                </Link>
+              </li>
+
+              {/* Logout Button */}
+              <li>
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-2 py-2 px-4 text-[#c1272d] font-medium border border-[#c1272d] rounded hover:bg-[#c1272d] hover:text-white transition-colors duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
+                  </svg>
+                  Cerrar Sesión
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {/* --- HERO SECTION --- */}
+      <section id="inicio" className="pt-28 pb-20 bg-gray-50">
+        <div className="max-w-screen-xl mx-auto flex flex-col-reverse md:flex-row items-center px-6 md:px-12 gap-10">
+          
+          <div className="flex-1 text-center md:text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-[#c1272d] mb-4">
+              Estado de Servicios
+            </h1>
+            {/* Colocar Nombre de la empresa */}
+            <h2 className="text-3xl text-gray-700 mb-3">Nombre de la empresa</h2>
+            <p className="text-gray-600 mb-6">
+              Revisa en tiempo real el estado de tus servicios contratados con HTS
+            </p>
+
+            <a
+              href="#monitoreo"
+              className="inline-block bg-[#c1272d] text-white px-6 py-3 rounded-md text-lg font-semibold transition-all duration-300 ease-out hover:bg-red-700 hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#c1272d]/30 active:translate-y-0"
+            >
+              Ver monitoreo
+            </a>
+          </div>
+
+          {/* IMAGE SIDE */}
+          <div className="flex-1">
+            <img
+              src="/img1.jpg"
+              alt="Equipo de trabajo"
+              className="w-full rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* --- LOGOS SECTION --- */}
+      <section className="bg-gradient-to-b from-white to-gray-100 py-16">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-14 md:gap-24 lg:gap-32">
+            <div className="flex justify-center">
+              <img
+                src="/img2.png"
+                alt="Empresa 1"
+                className="h-[180px] md:h-[200px] w-auto object-contain"
+              />
+            </div>
+
+            {/* Colocar nombre del archivo en el src ejemplo: /img.png */}
+            <div className="flex justify-center">
+              <img
+                src="/"
+                alt="Empresa 2"
+                className="h-[180px] md:h-[200px] w-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- SITE24x7 STATUS SECTION --- */}
+      <section id="monitoreo" className="bg-white py-16">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12">
+          <h3 className="text-2xl md:text-3xl font-semibold text-gray-800 text-center">
+            Estado de Servicios
+          </h3>
+          <p className="text-gray-600 text-center mt-2 mb-10">
+            Monitorea en tiempo real tus recursos
+          </p>
+
+          <div className="space-y-10">
+            
+            {/* Colocar Link de Site24x7 en el src*/}
+            <div className="bg-gray-50 border border-gray-200 rounded-xl shadow-md p-6">
+              <div className="w-full h-[720px] md:h-[840px] rounded-lg overflow-hidden shadow">
+                <iframe
+                  src=""
+                  title="Site24x7 - Servidor Principal"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- ACTION CARDS SECTION (Servicios) --- */}
+      <section id="servicios" className="bg-gray-50 py-16">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch max-w-5xl mx-auto">
+            
+            {/* Services List */}
+            <div className="bg-rose-50 border border-rose-200 rounded-2xl shadow p-6 h-full flex flex-col items-center min-h-[190px] md:min-h-[220px] lg:min-h-[250px] justify-center">
+              <h3 className="text-xl font-semibold text-[#c1272d] text-center mb-4 flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.8"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+                Servicios
+              </h3>
+              <ul className="w-full max-w-xs md:max-w-sm text-gray-700 space-y-3 text-left">
+                <li className="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 text-[#c1272d]"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
+                  </svg>
+                  Visita técnica
+                </li>
+                <li className="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 text-[#c1272d]"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v9a2 2 0 01-2 2H9l-4 4v-4H5a2 2 0 01-2-2V5z" />
+                  </svg>
+                  Soporte remoto
+                </li>
+                <li className="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 text-[#c1272d]"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M12 2l7 3v6c0 5-3.5 9.74-7 11-3.5-1.26-7-6-7-11V5l7-3z" />
+                  </svg>
+                  Servicios de seguridad
+                </li>
+                <li className="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 text-[#c1272d]"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M11.3 1.046a1 1 0 011.4 0l2.25 2.25a1 1 0 010 1.415l-1.02 1.02 5.59 5.59a2 2 0 010 2.829l-2.122 2.121a2 2 0 01-2.829 0l-5.59-5.59-1.02 1.02a1 1 0 01-1.415 0L1.704 9.3a1 1 0 010-1.415l2.25-2.25a1 1 0 011.415 0l.763.764 4.168-4.168z" />
+                  </svg>
+                  Equipos en taller
+                </li>
+              </ul>
+            </div>
+
+            {/* WhatsApp Contact */}
+            <div className="bg-emerald-500 text-white rounded-2xl shadow-lg p-6 h-full flex flex-col items-center justify-center text-center gap-6 min-h-[190px] md:min-h-[220px] lg:min-h-[250px]">
+              <div>
+                <h3 className="text-xl font-bold">¿Necesitas ayuda?</h3>
+                <p className="opacity-90 mt-1">Escríbenos:</p>
+              </div>
+
+              <a
+                href="https://wa.me/18494524373"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 w-full max-w-xs bg-white text-emerald-600 font-semibold px-5 py-3 rounded-lg shadow transition-all duration-300 ease-out hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-emerald-200 active:translate-y-0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  viewBox="0 0 32 32"
+                  fill="currentColor"
+                >
+                  <path d="M19.11 17.34c-.28-.14-1.63-.8-1.88-.9-.25-.1-.43-.14-.6.14-.17.28-.68.9-.83 1.08-.15.18-.31.2-.59.07-.28-.14-1.17-.43-2.23-1.37-.82-.73-1.38-1.63-1.54-1.9-.16-.28-.02-.43.12-.57.12-.12.28-.31.42-.46.14-.15.18-.25.28-.42.1-.17.05-.32-.02-.46-.07-.14-.6-1.44-.82-1.98-.22-.53-.44-.46-.6-.46-.15 0-.32-.02-.49-.02-.17 0-.46.07-.7.32-.24.25-.92.9-.92 2.2 0 1.3.94 2.55 1.07 2.73.14.18 1.85 2.83 4.48 3.97.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.08 1.63-.66 1.86-1.3.23-.64.23-1.2.16-1.31-.07-.11-.25-.18-.53-.32zM16.03 3C9.95 3 5 7.95 5 14.03c0 1.94.51 3.76 1.4 5.34L5 29l9.86-1.33a11.03 11.03 0 005.17 1.3C26.05 29 31 24.05 31 17.97S26.05 3 19.97 3h-3.94z" />
+                </svg>
+                WhatsApp
+              </a>
+
+              <p className="text-sm opacity-90">
+                Oficina: <span className="font-semibold">809-226-1628</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- FOOTER --- */}
+      <footer
+        className="bg-white border-t-4"
+        style={{ borderColor: "#c1272d" }}
+      >
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="col-span-1">
+              <div className="flex items-center gap-3">
+                <img src="/HTS-10.png" alt="HTS Logo" className="h-9" />
+              </div>
+              <p className="text-gray-600 mt-4">
+                Consultoría y soporte IT. Monitoreo, seguridad y soluciones para
+                tu empresa.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-[#c1272d] font-semibold mb-4">Enlaces</h4>
+              <ul className="space-y-2 text-gray-700">
+                <li>
+                  <a
+                    href="#inicio"
+                    className="hover:text-[#c1272d] transition-colors duration-300"
+                  >
+                    Inicio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#servicios"
+                    className="hover:text-[#c1272d] transition-colors duration-300"
+                  >
+                    Servicios
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#monitoreo"
+                    className="hover:text-[#c1272d] transition-colors duration-300"
+                  >
+                    Estado de servicios
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-[#c1272d] font-semibold mb-4">Contacto</h4>
+              <ul className="space-y-2 text-gray-700">
+                <li>
+                  Oficina: <span className="font-medium">809-226-1628</span>
+                </li>
+                <li>
+                  Email:{" "}
+                  <a
+                    href="mailto:info@hts.com"
+                    className="hover:text-[#c1272d] transition-colors duration-300"
+                  >
+                    info@hts.com
+                  </a>
+                </li>
+                <li>
+                  Dirección: Jardín Plaza, Av. 27 de Febrero, Santiago de los
+                  Caballeros 51000
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t mt-10 pt-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
+              <p>© {new Date().getFullYear()} HTS. Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
