@@ -5,6 +5,7 @@ export interface Database {
         Row: {
           id: number
           username: string
+          password?: string // Make optional in Row to avoid leaking it if not needed
           role: string | null
           empresa_id: number | null
           created_at: string | null
@@ -14,13 +15,14 @@ export interface Database {
           password?: string 
           role?: string | null
           empresa_id?: number | null
-          // id and created_at are optional because the DB generates them
+          created_at?: string
         }
         Update: {
           username?: string
           password?: string
           role?: string | null
           empresa_id?: number | null
+          created_at?: string
         }
       }
       content_page: {
@@ -37,6 +39,7 @@ export interface Database {
           slug: string
           content?: string | null
           updated_at?: string | null
+          created_at?: string
         }
         Update: {
           title?: string | null
@@ -51,7 +54,7 @@ export interface Database {
           nombre: string
         }
         Insert: {
-          id?: number // Optional: DB generates it
+          id?: number
           nombre: string
         }
         Update: {
