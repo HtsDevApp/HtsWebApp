@@ -14,6 +14,8 @@ import Content from "./pages/admin/Content";
 // User Dashboards
 import CongeladosDashboard from "./pages/dashboard/CongeladosDashboard";
 import GenericDashboard from "./pages/dashboard/GenericDashboard";
+import ContentList from "./pages/shared/ContentList";
+import ContentView from "./pages/shared/ContentView";
 
 // Components
 import AdminRoute from "./components/AdminRoute";
@@ -36,7 +38,7 @@ function DashboardDispatcher() {
   const companyName = user.empresa_nombre;
 
   if (companyName === "Congelados") return <Navigate to="/dashboard/congelados" replace />;
-  
+
   return <Navigate to="/dashboard/generic" replace />;
 }
 
@@ -67,12 +69,12 @@ export default function App() {
           <Route path="/admin/content" element={<AdminRoute><Content /></AdminRoute>} />
 
           {/* --- USER DASHBOARD ROUTES (Manual Additions) --- */}
-          
+
           {/* 1. Congelados */}
           <Route path="/dashboard/congelados" element={
             <ProtectedRoute>
               {/* Optional: Add extra check to ensure only Congelados users are here */}
-               <CongeladosDashboard />
+              <CongeladosDashboard />
             </ProtectedRoute>
           } />
 
@@ -88,16 +90,30 @@ export default function App() {
               <FormularioCaso />
             </ProtectedRoute>
           } />
-          
+
           <Route path="/encuesta" element={
             <ProtectedRoute>
               <Encuesta />
             </ProtectedRoute>
           } />
 
+          {/* List of articles */}
+          <Route path="/contents" element={
+            <ProtectedRoute>
+              <ContentList />
+            </ProtectedRoute>
+          } />
+
+          {/* Single article viewer (Slug parameter) */}
+          <Route path="/contents/:slug" element={
+            <ProtectedRoute>
+              <ContentView />
+            </ProtectedRoute>
+          } />
+
           {/* Catch all */}
           <Route path="*" element={<Navigate to="/" replace />} />
-          
+
         </Routes>
       </AuthProvider>
     </BrowserRouter>
